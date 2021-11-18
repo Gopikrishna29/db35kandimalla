@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+
+    - let jetid = toShow._id
+    - let jet_type = toShow.jet_type
+    - let jet_model = toShow.jet_model
+    - let jetCost = toShow.cost
+    div
+      div.row
+        div(class='jetAttr mr-3') jet ID is:
+        div #{jetid}
+      div.row
+        div(class='jetAttr mr-3') jet Type is:
+        div #{jet_type}
+      div.row
+        div(class='jetAttr mr-3') jet jet_model is:
+        div #{jet_model}
+      div.row
+        div(class='jetAttr mr-3') jet Cost is:
+        div #{jetCost}

@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+        - let jetid = toShow._id
+        - let jetname = toShow.jet_type
+        - let model = toShow.jet_model
+        - let cost = toShow.cost
+      
+        div.row(class='mb-2')
+          div.mr-1 ID is
+          div #{jetid}
+        - let actionid = "/resource/jets/" + jetid
+        form(id='jetForm', action= actionid, method="PUT")
+          div.form-group
+              label.jetAttr(for='jet_type') jetname
+              input#jet_type(type='text', name='jet_type', value= jet_type )
+          div.form-group
+              label.jetAttr(for='jet_model') jet_model 
+              input#jet_model(type='text', name='jet_model', value= jet_model )
+          div.form-group
+              label.jetAttr(for='cost') jet cost
+              input#cost(type='number', name='cost', value= cost )
+          input(type="submit")
+
+        script.
+          document.forms['jetForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(event.target.action, {
+              method: 'PUT',
+              body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            }).then((resp) => {
+              return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+              alert("Update succeded")
+              // TODO handle body
+            }).catch((error) => {
+              // TODO handle error
+              alert("Update failed " + error )
+            });
+          });

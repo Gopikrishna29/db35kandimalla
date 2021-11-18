@@ -1,0 +1,49 @@
+extends layout
+block content
+ h1= title
+ if (toShow == null)
+   h2 No instance to delete
+ else
+  - let jetid = toShow._id
+  - let jet_type = toShow.jet_type
+  - let jet_model = toShow.jet_model
+  - let jetcost = toShow.cost
+  - let actionid = "/resource/jets/" + jetid
+  script let actionid = "#{actionid}"
+  div
+    div.row
+     div(class='jetAttr mr-3') jet ID is:
+     div #{jetid}
+    div.row
+     div(class='jetAttr mr-3') jet Type is:
+     div #{jet_type}
+    div.row
+     div(class='jetAttr mr-3') jet model is:
+     div #{jet_model}
+    div.row
+     div(class='jetAttr mr-3') jet price is:
+     div #{jetcost}
+ button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+ button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+ script.
+  function cancel() {
+  // Go back to the home page for the jet collection
+  window.location.href='/jets'
+  }
+ script.
+  function deleteOnid() {
+   console.log("starting delete")
+   // delete first
+   fetch(actionid, {
+   method: 'DELETE' // Don't need a body for the delete
+   }).then((resp) => {
+   return resp.json(); // or resp.text() or whatever the server sends
+   }).then((body) => {
+   alert("Delete succeded")
+   window.location.href='/jets'
+   // TODO handle body
+   }).catch((error) => {
+   // TODO handle error
+   alert("Delete failed " + error )
+   });
+  }
