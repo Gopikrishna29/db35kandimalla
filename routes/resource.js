@@ -10,22 +10,22 @@ var jet_controller = require('../controllers/jet');
 // GET resources base. 
 router.get('/resource', api_controller.api); 
  
-/// COSTUME ROUTES /// 
+/// JET ROUTES /// 
  
-// POST request for creating a Costume.  
+// POST request for creating a Jet.  
 router.post('/resource/jets', jet_controller.jet_create_post); 
  
-// DELETE request to delete Costume. 
+// DELETE request to delete Jet. 
 router.delete('/resource/jets/:id', jet_controller.jet_delete); 
  
-// PUT request to update Costume. 
+// PUT request to update Jet. 
 router.put('/resource/jets/:id', 
 jet_controller.jet_update_put); 
  
-// GET request for one Costume. 
+// GET request for one Jet. 
 router.get('/resource/jets/:id', jet_controller.jet_detail); 
  
-// GET request for list of all Costume items. 
+// GET request for list of all Jet items. 
 router.get('/resource/jets', jet_controller.jet_list); 
  
 module.exports = router; 
